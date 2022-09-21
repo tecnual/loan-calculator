@@ -7,7 +7,7 @@
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "deploy": "ng build --prod --base-href=/loan-calculator/"
+    "deploy": "ng build --configuration production --base-href=/loan-calculator/"
   },
   "private": true,
   "dependencies": {
