@@ -167,6 +167,7 @@ a:hover {
 footer {
   margin-top: 8px;
   display: flex;
+  flex-direction: column;
   align-items: center;
   line-height: 20px;
 }
@@ -289,4 +290,9 @@ svg#clouds {
   position: sticky;
   top: 0;
   background-color: inherit;
+}
+.github-info {
+  display: flex;
+  flex-direction: row;
+  justify-content: start;
 }
