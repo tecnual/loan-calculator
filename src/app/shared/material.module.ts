@@ -11,6 +11,8 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule} from '@angular/material/button';
+import { MatTableModule } from '@angular/material/table';
+import { MatCardModule } from '@angular/material/card';
 
 const modules = [
   CommonModule,
@@ -23,7 +25,9 @@ const modules = [
   FormsModule,
   ReactiveFormsModule,
   MatIconModule,
-  MatButtonModule
+  MatButtonModule,
+  MatTableModule,
+  MatCardModule
 ];
 
 @NgModule({
