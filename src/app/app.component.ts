@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-
+import packageJson from '../../package.json';
 
 export interface AmortizationElement {
   position: number;
@@ -32,6 +32,7 @@ const ELEMENT_DATA: any[] = [
 export class AppComponent implements OnInit {
   title = 'loan-calculator';
   form: FormGroup = new FormGroup({});
+  public version: string = packageJson.version;
 
   displayedColumns: string[] = ['payDate', 'balance', 'pay', 'interest', 'principal', 'endBalance'];
   dataSource: AmortizationElement[] = [];
