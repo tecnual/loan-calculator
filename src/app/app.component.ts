@@ -12,6 +12,11 @@ export interface AmortizationElement {
   endBalance?: number
 }
 
+export interface GroupedRow {
+  year: number;
+  isGrouped: boolean;
+}
+
 const ELEMENT_DATA: any[] = [
   {position: 1, date: 'Hydrogen', balance: 1.0079, payDate: 'H', interest: 1.25, principal: 144000, endBalance: 139000 },
   {position: 2, date: 'Helium', balance: 4.0026, pay: 'He'},
@@ -34,8 +39,8 @@ export class AppComponent implements OnInit {
   form: FormGroup = new FormGroup({});
   public version: string = packageJson.version;
 
-  displayedColumns: string[] = ['payDate', 'balance', 'pay', 'interest', 'principal', 'endBalance'];
-  dataSource: AmortizationElement[] = [];
+  displayedColumns: string[] = ['payDate', 'pay', 'interest', 'principal', 'endBalance'];
+  dataSource: (AmortizationElement| GroupedRow)[] = [];
   monthlyPay: number = 0;
   constructor(private fb: FormBuilder) { }
 
@@ -56,17 +61,22 @@ export class AppComponent implements OnInit {
     const npay: number = this.form.controls['years'].value * 12;
     const capital: number = this.form.controls['amount'].value;
     const tax: number = this.form.controls['tax'].value;
-    const table: AmortizationElement[] = []
+    const table: (AmortizationElement| GroupedRow)[] = []
     let balance: number = capital;
+    const payDate: Date = new Date(this.form.controls['initialDate'].value);
+    table.push({year: payDate.getFullYear(), isGrouped: true});
 
     for (let i = 0; i < npay; i++) {
       const payDate: Date = new Date(this.form.controls['initialDate'].value);
+
       const interest = balance * (tax / 100 / 12);
       const principal = this.monthlyPay - interest;
       const endBalance = balance - principal;
+      console.log()
+      payDate.setMonth(payDate.getMonth() + i);
+      if ((payDate.getMonth() + 1) % 12 === 1) table.push({year: payDate.getFullYear(), isGrouped: true});
       table.push({position: i, payDate, balance, pay: this.monthlyPay, interest, principal, endBalance });
       balance = endBalance;
-      payDate.setMonth(payDate.getMonth() + i);
     }
 
     this.dataSource = table;
@@ -87,5 +97,9 @@ export class AppComponent implements OnInit {
     const years = this.form.controls['years'].value
     initialDate.setFullYear(initialDate.getFullYear() + years);
     return initialDate;
+  }
+
+  isGroup(index: number, item: GroupedRow): boolean {
+    return item.isGrouped;
   }
 }

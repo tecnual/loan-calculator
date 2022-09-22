@@ -129,35 +129,35 @@
     -->
     <!-- payDate Column -->
     <ng-container matColumnDef="payDate">
-      <th mat-header-cell *matHeaderCellDef> Fecha pago </th>
-      <td mat-cell *matCellDef="let element"> {{element.payDate | date: 'dd/MM/yy'}} </td>
+      <th mat-header-cell *matHeaderCellDef class="month-row"> Mes </th>
+      <td mat-cell *matCellDef="let element" class="month-row"> {{element.payDate | date: 'MMM'}} </td>
     </ng-container>
 
-    <!-- Weight Column -->
+    <!-- balance Column
     <ng-container matColumnDef="balance">
       <th mat-header-cell *matHeaderCellDef> Saldo </th>
       <td mat-cell *matCellDef="let element"> {{ element.balance | currency: 'EUR': 'symbol': '1.0-2'}} </td>
     </ng-container>
-
-    <!-- Symbol Column -->
+-->
+    <!-- pay Column -->
     <ng-container matColumnDef="pay">
       <th mat-header-cell *matHeaderCellDef> Pago </th>
       <td mat-cell *matCellDef="let element"> {{ element.pay | currency: 'EUR': 'symbol': '1.0-2'}} </td>
     </ng-container>
 
-    <!-- Symbol Column -->
+    <!-- interest Column -->
     <ng-container matColumnDef="interest">
       <th mat-header-cell *matHeaderCellDef> Intereses </th>
       <td mat-cell *matCellDef="let element"> {{ element.interest | currency: 'EUR': 'symbol': '1.0-2' }} </td>
     </ng-container>
 
-    <!-- Symbol Column -->
+    <!-- principal Column -->
     <ng-container matColumnDef="principal">
       <th mat-header-cell *matHeaderCellDef> Amortización </th>
       <td mat-cell *matCellDef="let element"> {{ element.principal | currency: 'EUR': 'symbol': '1.0-2'}} </td>
     </ng-container>
 
-    <!-- Symbol Column -->
+    <!-- endBalance Column -->
     <ng-container matColumnDef="endBalance">
       <th mat-header-cell *matHeaderCellDef> Saldo final </th>
       <td mat-cell *matCellDef="let element"> {{ element.endBalance | currency: 'EUR': 'symbol': '1.0-2'}} </td>
@@ -165,6 +165,14 @@
 
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+    <!-- groupHeader Column -->
+    <ng-container matColumnDef="groupHeader">
+      <td mat-cell *matCellDef="let element" class="year-row"> {{ element.year}} </td>
+    </ng-container>
+
+    <tr mat-row *matRowDef="let row; columns: ['groupHeader']; when: isGroup"></tr>
+
   </table>
 
 

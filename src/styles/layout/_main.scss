@@ -277,8 +277,19 @@ svg#clouds {
   fill: #b52e31;
 }
 
-.amortization-table td {
-  padding: .5em !important;
+
+.amortization-table td:not(:first-of-type,:last-of-type), .amortization-table th:not(:first-of-type, :last-of-type) {
+  padding: .2em !important;
+  text-align: right !important;
+}
+
+.amortization-table td:first-of-type, .amortization-table th:first-of-type {
+  text-align: left !important;
+}
+
+.amortization-table td:last-of-type, .amortization-table th:last-of-type {
+  text-align: right !important;
+  padding-right: 24px;
 }
 
 .amortization-table {
@@ -296,3 +307,12 @@ svg#clouds {
   flex-direction: row;
   justify-content: start;
 }
+
+.year-row {
+  font-size: 1.8em;
+  font-weight: bold;
+  width: 2em;
+  color:rgb(132, 132, 248)
+}
+
+
